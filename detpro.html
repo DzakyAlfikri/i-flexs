@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 16 - iFlexs | Sewa iPhone Tanpa Harus Memiliki</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000000;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .navbar .container {
+            padding-left: 100px;
+            padding-right: 100px;
+            max-width: 95%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 5px;
+                padding-right: 5px;
+                max-width: 98%;
+            }
+        }
+        
+        .product-detail {
+            padding-top: 180px;
+            padding-bottom: 60px;
+        }
+
+        .product-gallery {
+            border: 1px solid #7ED321;
+            border-radius: 16px;
+            padding: 20px;
+            background: #141414;
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: #7ED321;
+        }
+
+        .product-info h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .color-options,
+        .storage-options {
+            margin-bottom: 30px;
+        }
+
+        .option-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .color-btn,
+        .storage-btn {
+            background: transparent;
+            border: 1px solid #7ED321;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .color-btn.active,
+        .storage-btn.active,
+        .color-btn:hover,
+        .storage-btn:hover {
+            background: #7ED321;
+            color: black;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid #7ED321;
+            background: transparent;
+            color: #7ED321;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: #7ED321;
+            color: black;
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .price-tag {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #7ED321;
+            margin-bottom: 30px;
+        }
+
+        .rent-btn {
+            background: #7ED321;
+            color: black;
+            font-weight: bold;
+            padding: 15px 40px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .rent-btn:hover {
+            background: #6BC91A;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(126, 211, 33, 0.2);
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: transparent !important;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #7ED321 !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 600;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #7ED321 !important;
+        }
+
+        .btn-login {
+            background: #7ED321;
+            color: black !important;
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background: #6BC91A;
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand .navhighlight {
+            color: #ffffff;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: #0A0A0A;
+            padding: 80px 0;
+            margin-top: 60px;
+        }
+
+        .footer-brand h3 {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        .contact-info p {
+            color: rgb(255, 255, 255);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            font-size: 1rem;
+            width: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #7ED321;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: #6BC91A;
+            transform: translateY(-3px);
+            color: black;
+        }
+
+        @media (max-width: 768px) {
+            .product-detail {
+                padding-top: 100px;
+            }
+
+            .product-info {
+                margin-top: 30px;
+            }
+
+            .product-info h1 {
+                font-size: 2rem;
+            }
+
+            .footer {
+                padding: 40px 0;
+                text-align: center;
+            }
+            
+            .contact-info {
+                justify-content: center;
+                margin-bottom: 30px;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><span class="navhighlight">i</span>Flexs</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Produk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tentang Kami</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bantuan</a>
+                    </li>
+                </ul>
+                
+                <button class="btn btn-login">
+                    Masuk <i class="fas fa-sign-in-alt ms-2"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="product-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-gallery">
+                        <img src="ip16.png" alt="iPhone 16" class="main-image">
+                        <div class="thumbnail-container">
+                            <img src="ip16.png" class="thumbnail active" alt="iPhone 16">
+                            <img src="ip16.png" class="thumbnail" alt="iPhone 16">
+                            <img src="ip16.png" class="thumbnail" alt="iPhone 16">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <h1>iPhone 16</h1>
+                        <p class="product-description">
+                            iPhone 15 Pro Max hadir Dengan Chip A17 Pro Yang Super Cepat, Layar Super Retina XDR 6.7", Sistem Kamera Pro 48MP, Dan Body Titanium Yang Kokoh Namun Ringan. Nikmati Pengalaman iPhone Terbaik Dengan Menyewanya Di iFlexs.
+                        </p>
+                        
+                        <div class="color-options">
+                            <div class="option-label">Warna</div>
+                            <button class="color-btn active">Warna</button>
+                            <button class="color-btn">Putih</button>
+                            <button class="color-btn">Hitam</button>
+                            <button class="color-btn">Biru</button>
+                            <button class="color-btn">Hijau</button>
+                        </div>
+
+                        <div class="storage-options">
+                            <div class="option-label">Penyimpanan</div>
+                            <button class="storage-btn active">128 GB</button>
+                            <button class="storage-btn">256 GB</button>
+                        </div>
+
+                        <div class="quantity-selector">
+                            <div class="option-label">Durasi</div>
+                            <button class="quantity-btn">-</button>
+                            <input type="text" class="quantity-input" value="1" readonly>
+                            <button class="quantity-btn">+</button>
+                            <span>Hari</span>
+                        </div>
+
+                        <div class="price-tag">Rp500.000 /Hari</div>
+                        
+                        <button class="rent-btn">Sewa Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4">
+                    <div class="footer-brand mb-4">
+                        <h3 class="mb-2">i<span style="color: #7ED321;">Flexs</span></h3>
+                        <p class="mb-2">Sewa iPhone Murah<br>Dan Terpercaya</p>
+                    </div>
+                    <div class="contact-info">
+                        <p class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2" style="color: #7ED321;"></i>
+                            Jl. Blater Kalimanah, Indonesia
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2" style="color: #7ED321;"></i>
+                            +62 857-2237-4574
+                        </p>
+                        <p class="mb-0">
+                            <i class="fas fa-envelope  me-2" style="color: #7ED321;"></i>
+                            ekbin@gmail.com
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <h4 class="text-white mb-4">Follow Our Social Media</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Thumbnail click handler
+        document.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                // Remove active class from all thumbnails
+                document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked thumbnail
+                this.classList.add('active');
+                // Update main image
+                document.querySelector('.main-image').src = this.src.replace('-thumb', '');
+            });
+        });
+
+         // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.9)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'transparent';
+                navbar.style.backdropFilter = 'none';
+            }
+        });
+
+        // Quantity buttons
+        const quantityInput = document.querySelector('.quantity-input');
+        document.querySelectorAll('.quantity-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let value = parseInt(quantityInput.value);
+                if (this.textContent === '+') {
+                    quantityInput.value = value + 1;
+                } else if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
