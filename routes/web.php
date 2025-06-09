@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DetailProductController;
+use App\Http\Controllers\KategoriController;
 
 // Ubah route home ke HomeController
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -29,5 +30,17 @@ Route::middleware(['auth', 'userMiddleware'])->group(function () {
 
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    
+    // Replace the single kategori route with resource routes
+    Route::resource('/admin/kategoris', KategoriController::class, [
+        'names' => [
+            'index' => 'kategoris.index',
+            'create' => 'kategoris.create',
+            'store' => 'kategoris.store',
+            'edit' => 'kategoris.edit',
+            'update' => 'kategoris.update',
+            'destroy' => 'kategoris.destroy'
+        ]
+    ]);
 });
 
