@@ -14,76 +14,90 @@
     <section class="py-5">
         <div class="container">
             <div class="filter-section">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <input type="text" class="search-box" placeholder="Cari iPhone...">
-                    </div>
-                    <div class="col-lg-6 text-end">
-                        <div class="custom-select">
-                            <select class="sort-select">
-                                <option value="">Urutkan</option>
-                                <option value="price-low">Harga Terendah</option>
-                                <option value="price-high">Harga Tertinggi</option>
-                                <option value="newest">Terbaru</option>
-                            </select>
-                            <i class="fas fa-chevron-down"></i>
+                <div class="row">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Search Form -->
+                        <div class="col-lg-6">
+                            <form action="{{ route('product') }}" method="GET" class="d-flex">
+                                <input type="text" name="search" class="search-box me-2" 
+                                       placeholder="Cari iPhone..." value="{{ request('search') }}">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Sort Form -->
+                        <div class="col-lg-6 text-end">
+                            <form action="{{ route('product') }}" method="GET" class="d-flex justify-content-end">
+                                <select name="sort" class="sort-select" onchange="this.form.submit()">
+                                    <option value="">Urutkan</option>
+                                    <option value="price-low" {{ request('sort') == 'price-low' ? 'selected' : '' }}>
+                                        Harga Terendah
+                                    </option>
+                                    <option value="price-high" {{ request('sort') == 'price-high' ? 'selected' : '' }}>
+                                        Harga Tertinggi
+                                    </option>
+                                    <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>
+                                        Terbaru
+                                    </option>
+                                </select>
+                            </form>
                         </div>
                     </div>
                 </div>
+
+                <!-- Category Filter -->
                 <div class="mt-3">
-                    <button class="filter-btn active">Semua</button>
-                    <button class="filter-btn">iPhone 16</button>
-                    <button class="filter-btn">iPhone 15</button>
-                    <button class="filter-btn">iPhone 14</button>
-                    <button class="filter-btn">iPhone 13</button>
+                    <a href="{{ route('product') }}" 
+                       class="filter-btn {{ !request('kategori') ? 'active' : '' }}">Semua</a>
+                    @foreach($kategoris as $kategori)
+                    <a href="{{ route('product', ['kategori' => $kategori->id]) }}" 
+                       class="filter-btn {{ request('kategori') == $kategori->id ? 'active' : '' }}">
+                        {{ $kategori->nama }}
+                    </a>
+                    @endforeach
                 </div>
             </div>
 
             <!-- Products Grid -->
             <div class="row g-4">
-                @for ($i = 1; $i <= 3; $i++)
+                @forelse($products as $product)
                 <div class="col-lg-4 col-md-6">
                     <div class="phone-card">
-                        <img src="{{ asset('images/ip16.png') }}" alt="iPhone 16" class="phone-img mb-4">
-                        <h3>iPhone 16</h3>
-                        <p>Desain Futuristik, Kamera<br>Canggih, Performa Maksimal.</p>
-                        <div class="d-flex justify-content-between align-items-center">
+                        <img src="{{ asset('storage/' . $product->iphone->gambar) }}" 
+                             alt="{{ $product->iphone->nama }}" 
+                             class="phone-img mb-4">
+                        <h3>{{ $product->iphone->nama }}</h3>
+                        <p>{{ $product->iphone->deskripsi ?? 'Desain Futuristik, Kamera Canggih, Performa Maksimal.' }}</p>
+                        <div class="specs mt-3">
+                            <small class="d-block text-muted">
+                                <i class="fas fa-hdd me-1"></i> {{ $product->penyimpanan->kapasitas }}
+                            </small>
+                            <small class="d-block text-muted">
+                                <i class="fas fa-palette me-1"></i> {{ $product->warna->nama_warna }}
+                            </small>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
                             <div class="price">
-                                <span class="amount">Rp500.000</span>
+                                <span class="amount">Rp {{ number_format($product->harga_sewa_per_hari, 0, ',', '.') }}</span>
                                 <span class="period">/Hari</span>
                             </div>
-                            <a href="{{ route('detailproduct') }}" class="btn btn-success px-4">Sewa</a>
+                            <a href="{{ route('detailproduct', ['id' => $product->id]) }}" 
+                               class="btn btn-success px-4">Sewa</a>
                         </div>
                     </div>
                 </div>
-                @endfor
+                @empty
+                <div class="col-12 text-center py-5">
+                    <p>Tidak ada iPhone yang tersedia.</p>
+                </div>
+                @endforelse
             </div>
 
             <!-- Pagination -->
             <div class="d-flex justify-content-center mt-5">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <button class="btn" aria-label="Previous">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                        </li>
-                        <li class="page-item">
-                            <button class="btn active">1</button>
-                        </li>
-                        <li class="page-item">
-                            <button class="btn">2</button>
-                        </li>
-                        <li class="page-item">
-                            <button class="btn">3</button>
-                        </li>
-                        <li class="page-item">
-                            <button class="btn" aria-label="Next">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
+                {{ $products->links() }}
             </div>
         </div>
     </section>

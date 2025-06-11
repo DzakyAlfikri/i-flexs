@@ -18,12 +18,13 @@
 
     <div class="card">
         <div class="card-body">
-            <table class="table">
+            <table class="table-responsive">
+                <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>Aksi</th>
+                        <th width="10%">ID</th>
+                        <th width="60%">Nama</th>
+                        <th width="30%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,6 +47,7 @@
                     </tr>
                     @endforeach
                 </tbody>
+                </table>
             </table>
         </div>
     </div>

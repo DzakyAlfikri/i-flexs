@@ -13,7 +13,9 @@ class Transaksi extends Model
         'tanggal_mulai',
         'durasi_hari',
         'total_harga',
-        'status'
+        'status',
+        'jaminan',
+        'metode_pengambilan'
     ];
 
     protected $casts = [

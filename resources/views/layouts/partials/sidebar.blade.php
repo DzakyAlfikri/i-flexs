@@ -1,5 +1,5 @@
 <div class="sidebar">
-        <a href="#" class="brand mb-4">i<span>Flexs</span></a>
+        <a href="#" class="brand justify-content-center" >i<span>Flexs</span></a>
         
         <nav class="nav flex-column">
             <a class="nav-link active" href="#">
@@ -8,17 +8,20 @@
             <a class="nav-link" href="{{ route('kategoris.index') }}">
                 <i class="fas fa-mobile-alt"></i> Kategori
             </a>
-            <a class="nav-link" href="#">
-                <i class="fas fa-users"></i> Customers
+            <a class="nav-link" href="{{ route('penyimpanans.index') }}">
+                <i class="fas fa-users"></i> Penyimpanan
             </a>
-            <a class="nav-link" href="#">
-                <i class="fas fa-shopping-cart"></i> Orders
+            <a class="nav-link" href="{{ route('warnas.index') }}">
+                <i class="fas fa-shopping-cart"></i> Warna
             </a>
-            <a class="nav-link" href="#">
-                <i class="fas fa-chart-bar"></i> Reports
+            <a class="nav-link" href="{{ route('iphones.index') }}">
+                <i class="fas fa-chart-bar"></i> Iphone
             </a>
-            <a class="nav-link" href="#">
-                <i class="fas fa-cog"></i> Settings
+            <a class="nav-link" href="{{ route('variasi-iphones.index') }}">
+                <i class="fas fa-cog"></i> Variasi Iphone
+            </a>
+            <a class="nav-link" href="{{ route('admin.transaksi.index') }}">
+                <i class="fas fa-cog"></i> Transaksi
             </a>
         </nav>
     </div>
@@ -69,9 +72,12 @@
         .brand {
             font-size: 24px;
             font-weight: bold;
-            margin-bottom: 40px;
             color: white;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            height: 60px;          /* Match top-bar height */
+            padding: 0 20px;
         }
 
         .brand span {
@@ -102,6 +108,9 @@
             top: 0;
             z-index: 1000;
             margin-bottom: 0 !important;
+            height: 70px;          /* Explicitly set height */
+            display: flex;
+            align-items: center;
         }
 
         .user-menu .btn {

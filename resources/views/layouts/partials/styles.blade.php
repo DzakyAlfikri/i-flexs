@@ -488,6 +488,7 @@
             border: none;
             transition: all 0.3s ease;
             display: inline-block;
+            height: 100%;
         }
 
 
@@ -901,6 +902,7 @@
             border-radius: 20px;
             margin: 5px;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
 
         .filter-btn.active,
@@ -928,10 +930,15 @@
             background: #1a1a1a;
             border: 1px solid #7ED321;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 45px 10px 20px;
             border-radius: 25px;
             width: 200px;
         }
+
+        .sort-select {
+            appearance: none; /* Hilangkan arrow bawaan */
+        }
+
 
         .sort-select:focus {
             outline: none;
@@ -998,17 +1005,6 @@
         .period {
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
-        }
-
-        .btn-success {
-            background: #7ED321;
-            color: black;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 25px;
-            border: none;
-            transition: all 0.3s ease;
-            display: inline-block;
         }
 
 

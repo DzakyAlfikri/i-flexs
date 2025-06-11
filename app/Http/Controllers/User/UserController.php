@@ -10,6 +10,6 @@ class UserController extends Controller
     public function index()
     {
         // Logic for the user dashboard
-        return view('dashboard');
+        return view('home');
     }
 }

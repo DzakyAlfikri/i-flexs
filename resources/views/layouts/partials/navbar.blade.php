@@ -44,7 +44,8 @@
                                 <i class="fas fa-chevron-down"></i>
                             </button>
                             <ul class="dropdown" id="userDropdown">
-                                <li><a href="{{ route('profile.edit') }}">Profile</a></li>
+                                <li><a href="{{ route('profile.show') }}">Profil Saya</a></li>
+                                <li><a href="{{ route('profile.edit') }}">Edit Profil</a></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
