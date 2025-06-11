@@ -2,26 +2,26 @@
         <a href="#" class="brand justify-content-center" >i<span>Flexs</span></a>
         
         <nav class="nav flex-column">
-            <a class="nav-link active" href="#">
+            <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <i class="fas fa-home"></i> Dashboard
             </a>
             <a class="nav-link" href="{{ route('kategoris.index') }}">
-                <i class="fas fa-mobile-alt"></i> Kategori
+                <i class="fas fa-tag"></i> Kategori
             </a>
             <a class="nav-link" href="{{ route('penyimpanans.index') }}">
-                <i class="fas fa-users"></i> Penyimpanan
+                <i class="fas fa-database"></i> Penyimpanan
             </a>
             <a class="nav-link" href="{{ route('warnas.index') }}">
-                <i class="fas fa-shopping-cart"></i> Warna
+                <i class="fas fa-palette"></i> Warna
             </a>
             <a class="nav-link" href="{{ route('iphones.index') }}">
-                <i class="fas fa-chart-bar"></i> Iphone
+                <i class="fas fa-mobile"></i> Iphone
             </a>
             <a class="nav-link" href="{{ route('variasi-iphones.index') }}">
                 <i class="fas fa-cog"></i> Variasi Iphone
             </a>
             <a class="nav-link" href="{{ route('admin.transaksi.index') }}">
-                <i class="fas fa-cog"></i> Transaksi
+                <i class="fas fa-exchange-alt"></i> Transaksi
             </a>
             <a class="nav-link" href="{{ route('admin.users.index') }}">
                 <i class="fas fa-users"></i> User

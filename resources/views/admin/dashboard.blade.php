@@ -1,125 +1,182 @@
 @extends('layouts.admin')
 
 @section('content')
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Stats Cards -->
-        <div class="row g-4 mb-4">
-            <div class="col-md-3">
-                <div class="card stat-card">
-                    <div class="d-flex align-items-center">
-                        <div class="stat-icon me-3">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div>
-                            <h3 class="mb-1">150</h3>
-                            <p class="mb-0">Total Devices</p>
-                        </div>
+<div class="main-content">
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="d-flex align-items-center">
+                    <div class="stat-icon me-3">
+                        <i class="fas fa-users"></i>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card stat-card">
-                    <div class="d-flex align-items-center">
-                        <div class="stat-icon me-3">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div>
-                            <h3 class="mb-1">1,240</h3>
-                            <p class="mb-0">Active Users</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card stat-card">
-                    <div class="d-flex align-items-center">
-                        <div class="stat-icon me-3">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div>
-                            <h3 class="mb-1">450</h3>
-                            <p class="mb-0">Active Rentals</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card stat-card">
-                    <div class="d-flex align-items-center">
-                        <div class="stat-icon me-3">
-                            <i class="fas fa-money-bill-wave"></i>
-                        </div>
-                        <div>
-                            <h3 class="mb-1">$52,580</h3>
-                            <p class="mb-0">Revenue</p>
-                        </div>
+                    <div>
+                        <h3 class="mb-1">{{ $stats['total_users'] }}</h3>
+                        <p class="mb-0">Total Users</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Recent Orders -->
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5 class="card-title mb-4">Recent Orders</h5>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Customer</th>
-                                <th>Device</th>
-                                <th>Duration</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#ORD001</td>
-                                <td>John Doe</td>
-                                <td>iPhone 15 Pro</td>
-                                <td>7 Days</td>
-                                <td>$350</td>
-                                <td><span class="status-badge status-active">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td>#ORD002</td>
-                                <td>Jane Smith</td>
-                                <td>iPhone 16</td>
-                                <td>14 Days</td>
-                                <td>$650</td>
-                                <td><span class="status-badge status-pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>#ORD003</td>
-                                <td>Mike Johnson</td>
-                                <td>iPhone 15</td>
-                                <td>30 Days</td>
-                                <td>$1200</td>
-                                <td><span class="status-badge status-active">Active</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="d-flex align-items-center">
+                    <div class="stat-icon me-3">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="mb-1">{{ $stats['total_iphones'] }}</h3>
+                        <p class="mb-0">Total iPhones</p>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Charts Row -->
-        <div class="row g-4">
-            <div class="col-md-8">
-                <div class="chart-container">
-                    <h5 class="mb-4">Revenue Overview</h5>
-                    <canvas id="revenueChart"></canvas>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="d-flex align-items-center">
+                    <div class="stat-icon me-3">
+                        <i class="fas fa-sync"></i>
+                    </div>
+                    <div>
+                        <h3 class="mb-1">{{ $stats['active_rentals'] }}</h3>
+                        <p class="mb-0">Active Rentals</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="chart-container">
-                    <h5 class="mb-4">Device Distribution</h5>
-                    <canvas id="deviceChart"></canvas>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card">
+                <div class="d-flex align-items-center">
+                    <div class="stat-icon me-3">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h3 class="mb-1">{{ $stats['pending_transactions'] }}</h3>
+                        <p class="mb-0">Pending Approvals</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Pending Transactions Table -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title mb-4">Pending Approvals</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>iPhone</th>
+                            <th>Start Date</th>
+                            <th>Duration</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($pendingTransactions as $transaction)
+                        <tr>
+                            <td>#{{ $transaction->id }}</td>
+                            <td>{{ $transaction->user->name }}</td>
+                            <td>
+                                {{ $transaction->variasiIphone->iphone->nama }}
+                                <small class="d-block text-muted">
+                                    {{ $transaction->variasiIphone->warna->nama_warna }} • 
+                                    {{ $transaction->variasiIphone->penyimpanan->kapasitas }}
+                                </small>
+                            </td>
+                            <td>{{ $transaction->tanggal_mulai->format('d/m/Y') }}</td>
+                            <td>{{ $transaction->durasi_hari }} Hari</td>
+                            <td>Rp {{ number_format($transaction->total_harga, 0, ',', '.') }}</td>
+                            <td>
+                                <form action="{{ route('admin.transaksi.update-status', $transaction) }}" 
+                                      method="POST" class="d-inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="status" value="aktif">
+                                    <button type="submit" class="btn btn-success btn-sm me-1"
+                                            onclick="return confirm('Setujui pengajuan sewa ini?')">
+                                        <i class="fas fa-check"></i> Setujui
+                                    </button>
+                                </form>
+                                <form action="{{ route('admin.transaksi.update-status', $transaction) }}" 
+                                      method="POST" class="d-inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="hidden" name="status" value="batal">
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Tolak pengajuan sewa ini?')">
+                                        <i class="fas fa-times"></i> Tolak
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-4">
+                                <i class="fas fa-check-circle text-success mb-3 fa-2x"></i>
+                                <p class="mb-0">Tidak ada pengajuan yang perlu disetujui</p>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.stat-card {
+    background: #1a1a1a;
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background: #7ED321;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-icon i {
+    color: black;
+    font-size: 1.2rem;
+}
+
+.card {
+    background: #141414;
+    border: none;
+    color: white;
+}
+
+.table {
+    color: white;
+}
+
+.table th {
+    border-bottom-color: #2a2a2a;
+}
+
+.table td {
+    border-bottom-color: #1a1a1a;
+}
+
+.btn-success {
+    background: #7ED321;
+    border: none;
+}
+
+.btn-danger {
+    background: #dc3545;
+    border: none;
+}
+</style>
 @endsection
