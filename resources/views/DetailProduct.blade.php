@@ -40,9 +40,9 @@
 
                     <div class="quantity-selector">
                         <div class="option-label">Durasi</div>
-                        <button class="quantity-btn" onclick="decrementDays()">-</button>
+                        <button type="button" class="quantity-btn" onclick="window.decrementDays()">-</button>
                         <input type="text" class="quantity-input" id="duration" value="1" readonly>
-                        <button class="quantity-btn" onclick="incrementDays()">+</button>
+                        <button type="button" class="quantity-btn" onclick="window.incrementDays()">+</button>
                         <span>Hari</span>
                     </div>
 
@@ -58,34 +58,33 @@
 </section>
 
 <script>
-function incrementDays() {
-    const durationInput = document.getElementById('duration');
-    let currentDuration = parseInt(durationInput.value);
-    currentDuration+;
-    durationInput.value = currentDuration;
-}
-
-function decrementDays() {
-    const durationInput = document.getElementById('duration');
-    let currentDuration = parseInt(durationInput.value);
-    if (currentDuration > 1) {
-        currentDuration-;
+document.addEventListener('DOMContentLoaded', function() {
+    // Make functions globally available
+    window.incrementDays = function() {
+        const durationInput = document.getElementById('duration');
+        let currentDuration = parseInt(durationInput.value);
+        currentDuration++; // Fix the increment operator
         durationInput.value = currentDuration;
     }
-}
 
-function rentNow() {
-    const colorId = document.querySelector('.color-btn.active').dataset.colorId;
-    const storageId = document.querySelector('.storage-btn.active').dataset.storageId;
-    const duration = document.getElementById('duration').value;
-    
-    // Redirect to pesan page with parameters
-    window.location.href = "{{ route('pesan') }}?" + new URLSearchParams({
-        product_id: {{ $product->id }},
-        color_id: colorId,
-        storage_id: storageId,
-        duration: duration
-    }).toString();
-}
+    window.decrementDays = function() {
+        const durationInput = document.getElementById('duration');
+        let currentDuration = parseInt(durationInput.value);
+        if (currentDuration > 1) {
+            currentDuration--; // Fix the decrement operator
+            durationInput.value = currentDuration;
+        }
+    }
+
+    window.rentNow = function() {
+        const duration = document.getElementById('duration').value;
+        
+        // Redirect to pesan page with parameters
+        window.location.href = "{{ route('pesan') }}?" + new URLSearchParams({
+            product_id: {{ $product->id }},
+            duration: duration
+        }).toString();
+    }
+});
 </script>
 @endsection

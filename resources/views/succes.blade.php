@@ -15,8 +15,8 @@
                     Konfirmasi Melalui Email Dan WhatsApp Dalam Waktu 1x24 Jam.
                 </p>
                 <div>
-                    <a href="#" class="btn-action btn-status">Lihat Status Pengajuan</a>
-                    <a href="#" class="btn-action btn-home">Kembali ke Beranda</a>
+                    <a href="{{ route('profile.show') }}" class="btn-action btn-status">Lihat Status Pengajuan</a>
+                    <a href="{{ route('home') }}" class="btn-action btn-home">Kembali ke Beranda</a>
                 </div>
             </div>
         </div>
