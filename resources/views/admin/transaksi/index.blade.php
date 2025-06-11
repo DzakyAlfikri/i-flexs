@@ -3,7 +3,9 @@
 @section('content')
 <div class="main-content">
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Pengajuan Sewa</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Pengajuan Sewa</h1>
+    </div>
 
     @if(session('success'))
     <div class="alert alert-success">
@@ -66,7 +68,7 @@
                             @if($transaksi->status === 'pending')
                             <div class="btn-group">
                                 <form action="{{ route('admin.transaksi.update-status', $transaksi) }}" 
-                                      method="POST" class="d-inline">
+                                    method="POST" class="d-inline">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="status" value="aktif">
@@ -76,7 +78,7 @@
                                     </button>
                                 </form>
                                 <form action="{{ route('admin.transaksi.update-status', $transaksi) }}" 
-                                      method="POST" class="d-inline">
+                                    method="POST" class="d-inline">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="status" value="batal">
@@ -86,6 +88,17 @@
                                     </button>
                                 </form>
                             </div>
+                            @elseif($transaksi->status === 'aktif')
+                            <form action="{{ route('admin.transaksi.update-status', $transaksi) }}" 
+                                method="POST" class="d-inline">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="status" value="selesai">
+                                <button type="submit" class="btn btn-primary btn-sm"
+                                        onclick="return confirm('Selesaikan penyewaan ini?')">
+                                    <i class="fas fa-check-circle"></i> Selesai
+                                </button>
+                            </form>
                             @endif
                         </td>
                     </tr>

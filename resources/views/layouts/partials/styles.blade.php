@@ -1260,6 +1260,14 @@
             color: black;
         }
 
+        .selected-color {
+            background: #7ED321;
+            color: black;
+            padding: 8px 16px;
+            border-radius: 20px;
+             display: inline-block;
+        }
+
         .quantity-selector {
             display: flex;
             align-items: center;

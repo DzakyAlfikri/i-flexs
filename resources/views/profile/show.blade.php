@@ -7,23 +7,23 @@
             <div class="profile-avatar">
                 {{ substr(Auth::user()->name, 0, 2) }}
             </div>
-            <h1 class="profile-name">{{ Auth::user()->name }}</h1>
+            <h1 class="profile-name fw-semibold">{{ Auth::user()->name }}</h1>
         </div>
         <div class="buttons">
-            <a href="{{ route('profile.edit') }}" class="btn btn-edit">Edit Profil</a>
+            <a href="{{ route('profile.edit') }}" class="btn btn-edit fw-semibold">Edit Profil</a>
             <form method="POST" action="{{ route('logout') }}" class="d-inline">
                 @csrf
-                <button type="submit" class="btn btn-logout">Keluar</button>
+                <button type="submit" class="btn btn-logout fw-semibold">Keluar</button>
             </form>
         </div>
     </div>
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" href="#profile" data-bs-toggle="tab">Informasi Profil</a>
+            <a class="nav-link active fw-semibold" href="#profile" data-bs-toggle="tab">Informasi Profil</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#rentals" data-bs-toggle="tab">Sewaan</a>
+            <a class="nav-link fw-semibold" href="#rentals" data-bs-toggle="tab">Sewaan</a>
         </li>
     </ul>
 
@@ -33,21 +33,21 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="info-group">
-                            <div class="info-label">Nama Lengkap</div>
+                            <div class="info-label fw-semibold">Nama Lengkap</div>
                             <div class="info-value">{{ Auth::user()->name }}</div>
                         </div>
                         <div class="info-group">
-                            <div class="info-label">Email</div>
+                            <div class="info-label fw-semibold">Email</div>
                             <div class="info-value">{{ Auth::user()->email }}</div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="info-group">
-                            <div class="info-label">Nomor Ponsel</div>
+                            <div class="info-label fw-semibold">Nomor Ponsel</div>
                             <div class="info-value">{{ Auth::user()->phone ?? '-' }}</div>
                         </div>
                         <div class="info-group">
-                            <div class="info-label">Alamat</div>
+                            <div class="info-label fw-semibold">Alamat</div>
                             <div class="info-value">{{ Auth::user()->address ?? '-' }}</div>
                         </div>
                     </div>
@@ -60,8 +60,8 @@
                 <div class="rental-item mb-4">
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <h5 class="mb-2">{{ $transaksi->variasiIphone->iphone->nama }}</h5>
-                            <div class="rental-specs text-muted">
+                            <h5 class="mb-2 fw-bold">{{ $transaksi->variasiIphone->iphone->nama }}</h5>
+                            <div class="rental-specs fw-bold">
                                 <span>{{ $transaksi->variasiIphone->warna->nama_warna }}</span> •
                                 <span>{{ $transaksi->variasiIphone->penyimpanan->kapasitas }}</span>
                             </div>

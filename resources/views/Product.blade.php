@@ -71,10 +71,10 @@
                         <h3>{{ $product->iphone->nama }}</h3>
                         <p>{{ $product->iphone->deskripsi ?? 'Desain Futuristik, Kamera Canggih, Performa Maksimal.' }}</p>
                         <div class="specs mt-3">
-                            <small class="d-block text-muted">
+                            <small class="d-block">
                                 <i class="fas fa-hdd me-1"></i> {{ $product->penyimpanan->kapasitas }}
                             </small>
-                            <small class="d-block text-muted">
+                            <small class="d-block">
                                 <i class="fas fa-palette me-1"></i> {{ $product->warna->nama_warna }}
                             </small>
                         </div>

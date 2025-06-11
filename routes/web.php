@@ -15,6 +15,10 @@ use App\Http\Controllers\VariasiIphoneController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\SuccesController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\HelpController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\ContactController;
 
 // Ubah route home ke HomeController
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -22,6 +26,10 @@ Route::get('/products', [ProductController::class, 'index'])->name('product');
 Route::get('/detailproduct/{id}', [DetailProductController::class, 'show'])->name('detailproduct');
 Route::get('/pesan', [PesanController::class, 'index'])->name('pesan');
 Route::get('/succes', [SuccesController::class, 'index'])->name('success');
+Route::get('/help', [HelpController::class, 'index'])->name('help');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -50,6 +58,8 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
             'destroy' => 'kategoris.destroy'
         ]
     ]);
+
+    
 
     // Penyimpanan routes
     Route::resource('/admin/penyimpanans', PenyimpananController::class, [
@@ -99,13 +109,20 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
         ]
     ]);
 
+    Route::get('/admin/users', [UserManagementController::class, 'index'])->name('admin.users.index');
+    Route::delete('/admin/users/{user}', [UserManagementController::class, 'destroy'])->name('admin.users.destroy');
+});
+
+    
+
     // Transaksi routes
     Route::get('/admin/transaksi', [TransaksiController::class, 'index'])->name('admin.transaksi.index');
     Route::patch('/admin/transaksi/{transaksi}/status', [TransaksiController::class, 'updateStatus'])
         ->name('admin.transaksi.update-status');
-});
 
-Route::middleware(['auth'])->group(function () {
-    Route::post('/pesan', [PesanController::class, 'store'])->name('pesan.store');
-});
+    Route::middleware(['auth'])->group(function () {
+        Route::post('/pesan', [PesanController::class, 'store'])->name('pesan.store');
+ });
+
+
 

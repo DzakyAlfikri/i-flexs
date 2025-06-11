@@ -12,7 +12,7 @@
     @include('layouts.partials.styles')
 </head>
 <body>
-    @if(!request()->routeIs('product', 'detailproduct', 'pesan', 'profile.show'))
+    @if(!request()->routeIs('product', 'detailproduct', 'pesan', 'profile.show', 'profile.edit'))
     <!-- Background Effects -->
     <div class="glow-effect glow-1"></div>
     <div class="glow-effect glow-2"></div>

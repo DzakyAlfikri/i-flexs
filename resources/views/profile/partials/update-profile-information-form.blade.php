@@ -1,64 +1,174 @@
-<section>
+<section class="profile-form">
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+        <h2 class="text-xl text-white mb-3">
+            Informasi Profil
         </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="space-y-4">
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <div class="form-group">
+            <label for="name" class="form-label">Nama Lengkap</label>
+            <input type="text" 
+                   id="name" 
+                   name="name" 
+                   class="form-input" 
+                   value="{{ old('name', $user->name) }}" 
+                   required>
+            @error('name')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" 
+                   id="email" 
+                   name="email" 
+                   class="form-input" 
+                   value="{{ old('email', $user->email) }}" 
+                   required>
+            @error('email')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
+        <div class="form-group">
+            <label for="phone" class="form-label">Nomor Ponsel</label>
+            <input type="tel" 
+                   id="phone" 
+                   name="phone" 
+                   class="form-input" 
+                   value="{{ old('phone', $user->phone) }}">
+            @error('phone')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
         </div>
+
+        <div class="form-group">
+            <label for="address" class="form-label">Alamat</label>
+            <input type="text" 
+                   id="address" 
+                   name="address" 
+                   class="form-input" 
+                   value="{{ old('address', $user->address) }}">
+            @error('address')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn-save">Simpan</button>
+            <button type="reset" class="btn-cancel">Batal</button>
+        </div>
+
+        @if (session('status') === 'profile-updated')
+            <div class="alert-success">
+                Profil berhasil diperbarui
+            </div>
+        @endif
     </form>
 </section>
+
+<style>
+.profile-form {
+    background: #141414;
+    padding: 30px;
+    border-radius: 12px;
+    color: white;
+    margin-top: 80px
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #7ED321;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: white;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #7ED321;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.btn-save {
+    background: #7ED321;
+    color: black;
+    padding: 10px 24px;
+    border-radius: 20px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel {
+    background: #1E1E1E;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-save:hover {
+    background: #6db81d;
+}
+
+.btn-cancel:hover {
+    background: #2a2a2a;
+}
+
+.alert-success {
+    background: #7ED321;
+    color: black;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-weight: 500;
+    animation: fadeOut 2s forwards;
+    animation-delay: 2s;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+</style>

@@ -18,11 +18,21 @@ class TransaksiController extends Controller
     public function updateStatus(Request $request, Transaksi $transaksi)
     {
         $request->validate([
-            'status' => 'required|in:aktif,batal'
+            'status' => 'required|in:aktif,batal,selesai'
         ]);
 
-        if ($transaksi->status !== 'pending') {
+        if ($transaksi->status === 'batal') {
             return redirect()->back()->with('error', 'Status transaksi tidak dapat diubah');
+        }
+
+        // Only allow completion of active rentals
+        if ($request->status === 'selesai' && $transaksi->status !== 'aktif') {
+            return redirect()->back()->with('error', 'Hanya transaksi aktif yang dapat diselesaikan');
+        }
+
+        // Only allow activation of pending rentals
+        if ($request->status === 'aktif' && $transaksi->status !== 'pending') {
+            return redirect()->back()->with('error', 'Hanya transaksi pending yang dapat diaktifkan');
         }
 
         // Check stock availability if approving
@@ -40,7 +50,19 @@ class TransaksiController extends Controller
             $variasiIphone->save();
         }
 
-        return redirect()->back()->with('success', 
-            $request->status === 'aktif' ? 'Pengajuan sewa berhasil disetujui' : 'Pengajuan sewa ditolak');
+        // Return stock when rental is completed
+        if ($request->status === 'selesai') {
+            $variasiIphone = $transaksi->variasiIphone;
+            $variasiIphone->stok += 1;
+            $variasiIphone->save();
+        }
+
+        $messages = [
+            'aktif' => 'Pengajuan sewa berhasil disetujui',
+            'batal' => 'Pengajuan sewa ditolak',
+            'selesai' => 'Penyewaan telah selesai'
+        ];
+
+        return redirect()->back()->with('success', $messages[$request->status]);
     }
 }

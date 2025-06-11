@@ -23,6 +23,9 @@
             <a class="nav-link" href="{{ route('admin.transaksi.index') }}">
                 <i class="fas fa-cog"></i> Transaksi
             </a>
+            <a class="nav-link" href="{{ route('admin.users.index') }}">
+                <i class="fas fa-users"></i> User
+            </a>
         </nav>
     </div>
 

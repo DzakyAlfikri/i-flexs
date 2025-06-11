@@ -21,23 +21,21 @@
                     </p>
                     
                     <div class="color-options">
-                        <div class="option-label">Warna</div>
-                        @foreach($colors as $color)
-                        <button class="color-btn {{ $color->warna_id === $product->warna_id ? 'active' : '' }}"
-                                data-color-id="{{ $color->warna_id }}">
-                            {{ $color->warna->nama_warna }}
-                        </button>
-                        @endforeach
+                        <div class="color-info">
+                            <div class="option-label">Warna</div>
+                            <div class="selected-color">
+                                {{ $product->warna->nama_warna }}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="storage-options">
-                        <div class="option-label">Penyimpanan</div>
-                        @foreach($storages as $storage)
-                        <button class="storage-btn {{ $storage->penyimpanan_id === $product->penyimpanan_id ? 'active' : '' }}"
-                                data-storage-id="{{ $storage->penyimpanan_id }}">
-                            {{ $storage->penyimpanan->kapasitas }}
-                        </button>
-                        @endforeach
+                        <div class="color-info">
+                            <div class="option-label">Penyimpanan</div>
+                            <div class="selected-color">
+                                {{ $product->penyimpanan->kapasitas }}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="quantity-selector">
@@ -63,7 +61,7 @@
 function incrementDays() {
     const durationInput = document.getElementById('duration');
     let currentDuration = parseInt(durationInput.value);
-    currentDuration++;
+    currentDuration+;
     durationInput.value = currentDuration;
 }
 
@@ -71,7 +69,7 @@ function decrementDays() {
     const durationInput = document.getElementById('duration');
     let currentDuration = parseInt(durationInput.value);
     if (currentDuration > 1) {
-        currentDuration--;
+        currentDuration-;
         durationInput.value = currentDuration;
     }
 }

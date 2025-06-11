@@ -15,10 +15,10 @@
                     <a class="nav-link {{ request()->routeIs('product') ? 'active' : '' }}" href="{{ route('product') }}">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tentang Kami</a>
+                    <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang Kami</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Bantuan</a>
+                    <a class="nav-link {{ request()->routeIs('help') ? 'active' : '' }}" href="{{ route('help') }}">Bantuan</a>
                 </li>
                 @auth
                     <!-- Mobile only menu items -->
