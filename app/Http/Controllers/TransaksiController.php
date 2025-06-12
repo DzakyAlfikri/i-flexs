@@ -43,17 +43,30 @@ class TransaksiController extends Controller
         $transaksi->status = $request->status;
         $transaksi->save();
 
-        // Update stock if approved
+        // Get the related VariasiIphone model
+        $variasiIphone = $transaksi->variasiIphone;
+
+        // Update stock and availability when transaction is activated
         if ($request->status === 'aktif') {
-            $variasiIphone = $transaksi->variasiIphone;
             $variasiIphone->stok -= 1;
+            
+            // Set tersedia to false if stock becomes 0
+            if ($variasiIphone->stok === 0) {
+                $variasiIphone->tersedia = false;
+            }
+            
             $variasiIphone->save();
         }
 
-        // Return stock when rental is completed
+        // Return stock and update availability when rental is completed
         if ($request->status === 'selesai') {
-            $variasiIphone = $transaksi->variasiIphone;
             $variasiIphone->stok += 1;
+            
+            // Set tersedia to true when stock is available
+            if ($variasiIphone->stok > 0) {
+                $variasiIphone->tersedia = true;
+            }
+            
             $variasiIphone->save();
         }
 
