@@ -10,6 +10,13 @@
         <h1>i<span>Flexs</span></h1>
     </div>
 
+    {{-- Tampilkan pesan sukses dari register --}}
+    @if(session('success'))
+        <div class="alert alert-success mb-3">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" data-bs-toggle="tab" href="#login">Masuk</a>

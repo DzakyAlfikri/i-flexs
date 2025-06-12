@@ -9,7 +9,7 @@
                     </h2>
                 </div>
                 <div class="col-lg-4 text-lg-end">
-                    <a href="#" class="btn-rent">
+                    <a href="{{ route('product') }}" class="btn-rent">
                         Sewa Sekarang <i class="fas fa-arrow-right ms-2"></i>
                     </a>
                 </div>

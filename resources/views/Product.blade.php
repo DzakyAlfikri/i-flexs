@@ -97,8 +97,49 @@
 
             <!-- Pagination -->
             <div class="d-flex justify-content-center mt-5">
-                {{ $products->links() }}
-            </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <!-- Previous Page Link -->
+            @if ($products->onFirstPage())
+                <li class="page-item disabled">
+                    <button class="btn" aria-label="Previous">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </li>
+            @else
+                <li class="page-item">
+                    <a href="{{ $products->previousPageUrl() }}" class="btn" aria-label="Previous">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+            @endif
+
+            <!-- Pagination Elements -->
+            @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                <li class="page-item">
+                    <a href="{{ $url }}" class="btn {{ $page == $products->currentPage() ? 'active' : '' }}">
+                        {{ $page }}
+                    </a>
+                </li>
+            @endforeach
+
+            <!-- Next Page Link -->
+            @if ($products->hasMorePages())
+                <li class="page-item">
+                    <a href="{{ $products->nextPageUrl() }}" class="btn" aria-label="Next">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            @else
+                <li class="page-item disabled">
+                    <button class="btn" aria-label="Next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </li>
+            @endif
+        </ul>
+    </nav>
+</div>
         </div>
     </section>
 @endsection

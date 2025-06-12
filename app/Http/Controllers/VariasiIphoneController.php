@@ -32,7 +32,6 @@ class VariasiIphoneController extends Controller
             'penyimpanan_id' => 'required|exists:penyimpanans,id',
             'harga_sewa_per_hari' => 'required|numeric|min:0',
             'stok' => 'required|integer|min:0',
-            'tersedia' => 'boolean'
         ]);
 
         VariasiIphone::create($request->all());
